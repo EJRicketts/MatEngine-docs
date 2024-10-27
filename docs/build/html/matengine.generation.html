@@ -1,0 +1,500 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generation &mdash; MatEngine 0.0.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=282f96c0"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Utilities" href="matengine.utils.html" />
+    <link rel="prev" title="MatEngine documentation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            MatEngine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Packages:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Generation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-matengine.generation.decisiontree">matengine.generation.decisiontree</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#matengine.generation.decisiontree.decision_tree"><code class="docutils literal notranslate"><span class="pre">decision_tree</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#matengine.generation.decisiontree.decision_tree.DecisionNode"><code class="docutils literal notranslate"><span class="pre">decision_tree.DecisionNode</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matengine.generation.decisiontree.decision_tree.LeafNode"><code class="docutils literal notranslate"><span class="pre">decision_tree.LeafNode</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matengine.generation.decisiontree.decision_tree.build_tree"><code class="docutils literal notranslate"><span class="pre">decision_tree.build_tree()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matengine.generation.decisiontree.decision_tree.decide"><code class="docutils literal notranslate"><span class="pre">decision_tree.decide()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#matengine.generation.decisiontree.ellipse"><code class="docutils literal notranslate"><span class="pre">ellipse()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#matengine.generation.decisiontree.ellipsoid"><code class="docutils literal notranslate"><span class="pre">ellipsoid()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#matengine.generation.decisiontree.greater_than"><code class="docutils literal notranslate"><span class="pre">greater_than()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#matengine.generation.decisiontree.less_than"><code class="docutils literal notranslate"><span class="pre">less_than()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#matengine.generation.decisiontree.linear"><code class="docutils literal notranslate"><span class="pre">linear()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-matengine.generation.filters">matengine.generation.filters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#matengine.generation.filters.convex_hull"><code class="docutils literal notranslate"><span class="pre">convex_hull()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-matengine.generation.generators">matengine.generation.generators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#matengine.generation.generators.create_covariance_model"><code class="docutils literal notranslate"><span class="pre">create_covariance_model()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#matengine.generation.generators.random_field"><code class="docutils literal notranslate"><span class="pre">random_field()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-matengine.generation.plurigaussian">matengine.generation.plurigaussian</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#matengine.generation.plurigaussian.plurigaussian_simulation"><code class="docutils literal notranslate"><span class="pre">plurigaussian_simulation()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="matengine.utils.html">Utilities</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/examples.two_phase_pgs.html">Plurigaussian Simulation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Coming soon:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="matengine.characterization.html">Characterization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matengine.discovery.html">Discovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matengine.simulation.html">Simulation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MatEngine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Generation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/matengine.generation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-matengine.generation">
+<span id="generation"></span><h1>Generation<a class="headerlink" href="#module-matengine.generation" title="Link to this heading"></a></h1>
+<p>The generation subpackage provides tools for generating material structures at various scales.</p>
+<section id="module-matengine.generation.decisiontree">
+<span id="matengine-generation-decisiontree"></span><h2>matengine.generation.decisiontree<a class="headerlink" href="#module-matengine.generation.decisiontree" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="matengine.generation.decisiontree.decision_tree">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">matengine.generation.decisiontree.</span></span><span class="sig-name descname"><span class="pre">decision_tree</span></span><a class="reference internal" href="_modules/matengine/generation/decisiontree.html#decision_tree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#matengine.generation.decisiontree.decision_tree" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A class to represent a decision tree for making decisions based on user-defined criteria.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="matengine.generation.decisiontree.decision_tree.DecisionNode">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DecisionNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yes_branch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_branch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matengine/generation/decisiontree.html#decision_tree.DecisionNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#matengine.generation.decisiontree.decision_tree.DecisionNode" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A class to represent a decision node in the decision tree.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="matengine.generation.decisiontree.decision_tree.DecisionNode.decide">
+<span class="sig-name descname"><span class="pre">decide</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matengine/generation/decisiontree.html#decision_tree.DecisionNode.decide"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#matengine.generation.decisiontree.decision_tree.DecisionNode.decide" title="Link to this definition"></a></dt>
+<dd><p>Make a decision at this node based on the input data.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><dl class="simple">
+<dt>data: dict</dt><dd><p>The input data used for making a decision.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>The action or next node based on the function’s evaluation.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="matengine.generation.decisiontree.decision_tree.LeafNode">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LeafNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">action</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matengine/generation/decisiontree.html#decision_tree.LeafNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#matengine.generation.decisiontree.decision_tree.LeafNode" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A class to represent a leaf node in the decision tree.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="matengine.generation.decisiontree.decision_tree.LeafNode.decide">
+<span class="sig-name descname"><span class="pre">decide</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matengine/generation/decisiontree.html#decision_tree.LeafNode.decide"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#matengine.generation.decisiontree.decision_tree.LeafNode.decide" title="Link to this definition"></a></dt>
+<dd><p>Return the action associated with this leaf node.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><dl class="simple">
+<dt>data: dict </dt><dd><p>The input data used for making a decision.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>The action stored in this leaf node.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="matengine.generation.decisiontree.decision_tree.build_tree">
+<span class="sig-name descname"><span class="pre">build_tree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instructions</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matengine/generation/decisiontree.html#decision_tree.build_tree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#matengine.generation.decisiontree.decision_tree.build_tree" title="Link to this definition"></a></dt>
+<dd><p>Build a decision tree based on the given instructions.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><dl class="simple">
+<dt>instructions: dict </dt><dd><p>A dictionary containing details about the nodes, including type, function, arguments, and branches.</p>
+</dd>
+</dl>
+</dd>
+<dt>Notes:</dt><dd><ul class="simple">
+<li><p>Nodes can be either decision nodes or leaf nodes.</p></li>
+<li><p>The ‘root’ node is assumed to be the starting point.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="matengine.generation.decisiontree.decision_tree.decide">
+<span class="sig-name descname"><span class="pre">decide</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matengine/generation/decisiontree.html#decision_tree.decide"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#matengine.generation.decisiontree.decision_tree.decide" title="Link to this definition"></a></dt>
+<dd><p>Make a decision using the decision tree.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><dl class="simple">
+<dt>data: dict</dt><dd><p>The input data used for making a decision.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>The action to be taken as per the leaf node reached.</p>
+</dd>
+<dt>Raises:</dt><dd><p>ValueError: If the decision tree has not been built yet.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="matengine.generation.decisiontree.ellipse">
+<span class="sig-prename descclassname"><span class="pre">matengine.generation.decisiontree.</span></span><span class="sig-name descname"><span class="pre">ellipse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matengine/generation/decisiontree.html#ellipse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#matengine.generation.decisiontree.ellipse" title="Link to this definition"></a></dt>
+<dd><p>Determine if a point lies inside or on the boundary of an ellipse.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><dl class="simple">
+<dt>data: dict</dt><dd><p>The input data.</p>
+</dd>
+<dt>key1: str </dt><dd><p>The key representing the x-coordinate of the point.</p>
+</dd>
+<dt>key2: str </dt><dd><p>The key representing the y-coordinate of the point.</p>
+</dd>
+<dt>cx: float </dt><dd><p>The x-coordinate of the ellipse center.</p>
+</dd>
+<dt>cy: float </dt><dd><p>The y-coordinate of the ellipse center.</p>
+</dd>
+<dt>sx: float </dt><dd><p>The semi-axis length in the x-direction.</p>
+</dd>
+<dt>sy: float </dt><dd><p>The semi-axis length in the y-direction.</p>
+</dd>
+<dt>angle: float, optional</dt><dd><p>The rotation angle of the ellipse in degrees. Default is 0.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>bool: </dt><dd><p>True if the point lies within or on the ellipse, False otherwise.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="matengine.generation.decisiontree.ellipsoid">
+<span class="sig-prename descclassname"><span class="pre">matengine.generation.decisiontree.</span></span><span class="sig-name descname"><span class="pre">ellipsoid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sz</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matengine/generation/decisiontree.html#ellipsoid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#matengine.generation.decisiontree.ellipsoid" title="Link to this definition"></a></dt>
+<dd><p>Determine if a point lies inside or on the boundary of an ellipsoid.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><dl class="simple">
+<dt>data: dict</dt><dd><p>The input data.</p>
+</dd>
+<dt>key1: str </dt><dd><p>The key representing the x-coordinate of the point.</p>
+</dd>
+<dt>key2: str </dt><dd><p>The key representing the y-coordinate of the point.</p>
+</dd>
+<dt>key3: str </dt><dd><p>The key representing the z-coordinate of the point.</p>
+</dd>
+<dt>cx: float </dt><dd><p>The x-coordinate of the ellipsoid center.</p>
+</dd>
+<dt>cy: float </dt><dd><p>The y-coordinate of the ellipsoid center.</p>
+</dd>
+<dt>cz: float </dt><dd><p>The z-coordinate of the ellipsoid center.</p>
+</dd>
+<dt>sx: float </dt><dd><p>The semi-axis length in the x-direction.</p>
+</dd>
+<dt>sy: float </dt><dd><p>The semi-axis length in the y-direction.</p>
+</dd>
+<dt>sz: float </dt><dd><p>The semi-axis length in the z-direction.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>bool: </dt><dd><p>True if the point lies within or on the ellipsoid, False otherwise.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="matengine.generation.decisiontree.greater_than">
+<span class="sig-prename descclassname"><span class="pre">matengine.generation.decisiontree.</span></span><span class="sig-name descname"><span class="pre">greater_than</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matengine/generation/decisiontree.html#greater_than"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#matengine.generation.decisiontree.greater_than" title="Link to this definition"></a></dt>
+<dd><p>Determine if the value in the data is greater than the threshold.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><dl class="simple">
+<dt>data: dict</dt><dd><p>The input data.</p>
+</dd>
+<dt>key: str</dt><dd><p>The key whose value is being compared.</p>
+</dd>
+<dt>threshold: numeric</dt><dd><p>The threshold value.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>bool: </dt><dd><p>True if the value is greater than the threshold, False otherwise.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="matengine.generation.decisiontree.less_than">
+<span class="sig-prename descclassname"><span class="pre">matengine.generation.decisiontree.</span></span><span class="sig-name descname"><span class="pre">less_than</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matengine/generation/decisiontree.html#less_than"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#matengine.generation.decisiontree.less_than" title="Link to this definition"></a></dt>
+<dd><p>Determine if the value in the data is less than or equal to the threshold.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><dl class="simple">
+<dt>data: dict</dt><dd><p>The input data.</p>
+</dd>
+<dt>key: str</dt><dd><p>The key whose value is being compared.</p>
+</dd>
+<dt>threshold: numeric</dt><dd><p>The threshold value.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>bool: </dt><dd><p>True if the value is less than or equal to the threshold, False otherwise.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="matengine.generation.decisiontree.linear">
+<span class="sig-prename descclassname"><span class="pre">matengine.generation.decisiontree.</span></span><span class="sig-name descname"><span class="pre">linear</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matengine/generation/decisiontree.html#linear"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#matengine.generation.decisiontree.linear" title="Link to this definition"></a></dt>
+<dd><p>Determine if the value lies on or above the line defined by the equation y = mx + c.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><dl class="simple">
+<dt>data: dict</dt><dd><p>The input data.</p>
+</dd>
+<dt>key1: str</dt><dd><p>The key representing the x-value.</p>
+</dd>
+<dt>key2: str` </dt><dd><p>The key representing the y-value.</p>
+</dd>
+<dt>m: float </dt><dd><p>The slope of the line.</p>
+</dd>
+<dt>c: float </dt><dd><p>The y-intercept of the line.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>bool: </dt><dd><p>True if the point is on or above the line, False otherwise.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-matengine.generation.filters">
+<span id="matengine-generation-filters"></span><h2>matengine.generation.filters<a class="headerlink" href="#module-matengine.generation.filters" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="matengine.generation.filters.convex_hull">
+<span class="sig-prename descclassname"><span class="pre">matengine.generation.filters.</span></span><span class="sig-name descname"><span class="pre">convex_hull</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pluri</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thresh</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matengine/generation/filters.html#convex_hull"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#matengine.generation.filters.convex_hull" title="Link to this definition"></a></dt>
+<dd><p>Apply a convex hull transformation to each connected component in an image that exceeds a specified size threshold.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><dl class="simple">
+<dt>pluri: ndarray</dt><dd><p>A multi-dimensional numpy array representing an image. The function supports both 2D and 3D images.</p>
+</dd>
+<dt>thresh: int, optional </dt><dd><p>The threshold value for the minimum number of voxels/pixels a connected component must have to be considered for the convex hull transformation. Defaults to 5.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>ndarray: </dt><dd><p>A new image array of the same dimensions as <cite>pluri</cite> where each significant connected component (as determined by <cite>thresh</cite>) has been transformed using the convex hull operation.</p>
+</dd>
+</dl>
+</dd>
+<dt>Notes:</dt><dd><ul class="simple">
+<li><p>For 2D images, the function calculates the convex hull for each connected component directly.</p></li>
+<li><p>For 3D images, the convex hull is applied slice by slice and then accumulated, assuming that <cite>pluri</cite> represents a stack of 2D slices.</p></li>
+<li><p>The function uses scipy’s <cite>label</cite> function to identify connected components and skimage’s <cite>convex_hull_image</cite> for the convex hull transformation.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-matengine.generation.generators">
+<span id="matengine-generation-generators"></span><h2>matengine.generation.generators<a class="headerlink" href="#module-matengine.generation.generators" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="matengine.generation.generators.create_covariance_model">
+<span class="sig-prename descclassname"><span class="pre">matengine.generation.generators.</span></span><span class="sig-name descname"><span class="pre">create_covariance_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kernel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length_scale</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matengine/generation/generators.html#create_covariance_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#matengine.generation.generators.create_covariance_model" title="Link to this definition"></a></dt>
+<dd><p>Create a covariance model based on the specified kernel type.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><dl class="simple">
+<dt>kernel<span class="classifier">str</span></dt><dd><dl class="simple">
+<dt>The type of kernel to use for the covariance model. Options are:</dt><dd><ul class="simple">
+<li><p>‘gau’: Gaussian kernel</p></li>
+<li><p>‘mat’: Matern kernel</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt>dim<span class="classifier">list or tuple</span></dt><dd><p>The dimensions for the covariance model.</p>
+</dd>
+<dt>variance<span class="classifier">float</span></dt><dd><p>The variance parameter for the covariance model.</p>
+</dd>
+<dt>length_scale<span class="classifier">float</span></dt><dd><p>The length scale parameter for the covariance model.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>model<span class="classifier">gstools.Gaussian or gstools.Matern</span></dt><dd><p>The created covariance model using the specified kernel, dimension,
+variance, and length scale parameters.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="matengine.generation.generators.random_field">
+<span class="sig-prename descclassname"><span class="pre">matengine.generation.generators.</span></span><span class="sig-name descname"><span class="pre">random_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode_no</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">250</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matengine/generation/generators.html#random_field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#matengine.generation.generators.random_field" title="Link to this definition"></a></dt>
+<dd><p>Generates a random field using a stochastic random field (SRF) model from gstools.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><dl class="simple">
+<dt>model: </dt><dd><p>A geostatistical model from gstools to be used for generating the random field. Typically, this is an instance of a Gaussian process model.</p>
+</dd>
+<dt>dim: tuple or list </dt><dd><p>A tuple or list representing the dimensions of the random field. It should contain either two or three elements for 2D or 3D fields respectively.</p>
+</dd>
+<dt>seed: int, optional </dt><dd><p>A seed value for the random number generator to ensure reproducibility. Default is 0.</p>
+</dd>
+<dt>mode_no: int, optional </dt><dd><p>The number of modes to use for the stochastic simulation. Default is 250.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>numpy.ndarray: </dt><dd><p>The generated random field, either 2D or 3D depending on the input dimensions.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-matengine.generation.plurigaussian">
+<span id="matengine-generation-plurigaussian"></span><h2>matengine.generation.plurigaussian<a class="headerlink" href="#module-matengine.generation.plurigaussian" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="matengine.generation.plurigaussian.plurigaussian_simulation">
+<span class="sig-prename descclassname"><span class="pre">matengine.generation.plurigaussian.</span></span><span class="sig-name descname"><span class="pre">plurigaussian_simulation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ldim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matengine/generation/plurigaussian.html#plurigaussian_simulation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#matengine.generation.plurigaussian.plurigaussian_simulation" title="Link to this definition"></a></dt>
+<dd><p>Performs Plurigaussian simulation based on specified dimensions and Gaussian fields, using a decision tree for classification at each point.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><dl class="simple">
+<dt>dim: tuple or list</dt><dd><p>The dimensions of the output simulation grid, can be 2D or 3D.</p>
+</dd>
+<dt>tree: DecisionTree</dt><dd><p>A decision tree object that makes classification decisions based on Gaussian fields.</p>
+</dd>
+<dt>fields: list of ndarray</dt><dd><p>A list of Gaussian fields, where each field is a numpy array representing a spatial distribution of values. The list should contain 2 fields for 2D simulations and 3 fields for 3D simulations.</p>
+</dd>
+<dt>ldim: (int, optional)</dt><dd><p>The dimensions of the lithotype in each direction used for decision tree classification. Defaults to 100.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>L: ndarray </dt><dd><p>The lithotype based on the decision tree configuration. An ldim x ldim (or ldim x ldim x ldim for 3D) array where each entry is the decision outcome based on the linearly scaled indices.</p>
+</dd>
+<dt>P: ndarray </dt><dd><p>Plurigaussian realisation. An array of the same dimension as <cite>dim</cite> where each entry is the decision outcome based on the values from the <cite>fields</cite> array.</p>
+</dd>
+</dl>
+</dd>
+<dt>Notes:</dt><dd><ul class="simple">
+<li><p>The function scales the indices of the lithotype linearly to map the range [-3, 3] across <cite>ldim</cite>.</p></li>
+<li><p>The decision tree is queried with this scaled data to populate the <cite>L</cite> array.</p></li>
+<li><p>For generating the <cite>P</cite> array, the decision tree is queried with actual data points from the <cite>fields</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="MatEngine documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="matengine.utils.html" class="btn btn-neutral float-right" title="Utilities" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Evan John Ricketts.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
