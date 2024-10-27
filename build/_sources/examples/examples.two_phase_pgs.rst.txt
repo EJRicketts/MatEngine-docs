@@ -1,0 +1,55 @@
+Plurigaussian Simulation
+========================
+
+.. code-block::
+
+        from matengine.generation.generators import random_field, create_covariance_model
+        from matengine.generation.decisiontree import decision_tree, ellipse
+        from matengine.generation.plurigaussian import plurigaussian_simulation
+        from matengine.utils.plotting import array_to_vtk
+
+        dim = [50,50]
+        ls=5
+        var=1
+        kernel = 'gau'
+        seed1 = 123
+        seed2 = 1234
+        mdl = create_covariance_model(kernel, dim, var, ls)
+        z1 = random_field(mdl, dim, seed=seed1)
+        z2 = random_field(mdl, dim, seed=seed2)
+        fields = [z1, z2]
+
+        Config = {
+            'root': {
+                'type': 'decision',
+                'func': ellipse,
+                'args': {
+                    'key1': 'Z1',
+                    'key2': 'Z2',
+                    'cx': 0,
+                    'cy': 0,
+                    'sx': 2.6,
+                    'sy': 0.3
+                },
+                'yes_branch': 'phase1',
+                'no_branch': 'phase0'
+            },
+            'phase0': {
+                'type': 'leaf',
+                'action': 0
+            },
+            'phase1': {
+                'type': 'leaf',
+                'action': 1
+            },
+        }
+
+        tree_config = Config
+
+        tree = decision_tree()
+        tree.build_tree(tree_config)
+
+        L, P = plurigaussian_simulation(dim, tree, fields, ldim=500)
+
+        array_to_vtk(L, 'L')
+        array_to_vtk(P, 'P')

@@ -1,0 +1,401 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>matengine.generation.decisiontree &mdash; MatEngine 0.0.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=282f96c0"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            MatEngine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Packages:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../matengine.generation.html">Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../matengine.utils.html">Utilities</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/examples.two_phase_pgs.html">Plurigaussian Simulation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Coming soon:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../matengine.characterization.html">Characterization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../matengine.discovery.html">Discovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../matengine.simulation.html">Simulation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">MatEngine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">matengine.generation.decisiontree</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for matengine.generation.decisiontree</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<div class="viewcode-block" id="decision_tree">
+<a class="viewcode-back" href="../../../matengine.generation.html#matengine.generation.decisiontree.decision_tree">[docs]</a>
+<span class="k">class</span> <span class="nc">decision_tree</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A class to represent a decision tree for making decisions based on user-defined criteria.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize the decision tree with an empty structure.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tree</span> <span class="o">=</span> <span class="kc">None</span>
+    
+<div class="viewcode-block" id="decision_tree.build_tree">
+<a class="viewcode-back" href="../../../matengine.generation.html#matengine.generation.decisiontree.decision_tree.build_tree">[docs]</a>
+    <span class="k">def</span> <span class="nf">build_tree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instructions</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Build a decision tree based on the given instructions.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            instructions: dict </span>
+<span class="sd">                A dictionary containing details about the nodes, including type, function, arguments, and branches.</span>
+<span class="sd">        </span>
+<span class="sd">        Notes:</span>
+<span class="sd">            - Nodes can be either decision nodes or leaf nodes.</span>
+<span class="sd">            - The &#39;root&#39; node is assumed to be the starting point.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">nodes</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">node_id</span><span class="p">,</span> <span class="n">details</span> <span class="ow">in</span> <span class="n">instructions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">details</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;decision&#39;</span><span class="p">:</span>
+                <span class="n">nodes</span><span class="p">[</span><span class="n">node_id</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">DecisionNode</span><span class="p">(</span>
+                    <span class="n">func</span><span class="o">=</span><span class="n">details</span><span class="p">[</span><span class="s1">&#39;func&#39;</span><span class="p">],</span>
+                    <span class="n">args</span><span class="o">=</span><span class="n">details</span><span class="p">[</span><span class="s1">&#39;args&#39;</span><span class="p">]</span>
+                <span class="p">)</span>
+            <span class="k">elif</span> <span class="n">details</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;leaf&#39;</span><span class="p">:</span>
+                <span class="n">nodes</span><span class="p">[</span><span class="n">node_id</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">LeafNode</span><span class="p">(</span><span class="n">details</span><span class="p">[</span><span class="s1">&#39;action&#39;</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">node_id</span><span class="p">,</span> <span class="n">details</span> <span class="ow">in</span> <span class="n">instructions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">details</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;decision&#39;</span><span class="p">:</span>
+                <span class="n">nodes</span><span class="p">[</span><span class="n">node_id</span><span class="p">]</span><span class="o">.</span><span class="n">yes_branch</span> <span class="o">=</span> <span class="n">nodes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">details</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;yes_branch&#39;</span><span class="p">))</span>
+                <span class="n">nodes</span><span class="p">[</span><span class="n">node_id</span><span class="p">]</span><span class="o">.</span><span class="n">no_branch</span> <span class="o">=</span> <span class="n">nodes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">details</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;no_branch&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tree</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="s1">&#39;root&#39;</span><span class="p">]</span>  <span class="c1"># Assuming &#39;root&#39; is the entry point defined in your instructions</span></div>
+
+
+<div class="viewcode-block" id="decision_tree.decide">
+<a class="viewcode-back" href="../../../matengine.generation.html#matengine.generation.decisiontree.decision_tree.decide">[docs]</a>
+    <span class="k">def</span> <span class="nf">decide</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Make a decision using the decision tree.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            data: dict</span>
+<span class="sd">                The input data used for making a decision.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The action to be taken as per the leaf node reached.</span>
+<span class="sd">        </span>
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If the decision tree has not been built yet.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">decide</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The decision tree has not been built yet.&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="decision_tree.DecisionNode">
+<a class="viewcode-back" href="../../../matengine.generation.html#matengine.generation.decisiontree.decision_tree.DecisionNode">[docs]</a>
+    <span class="k">class</span> <span class="nc">DecisionNode</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A class to represent a decision node in the decision tree.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">yes_branch</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">no_branch</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Initialize a decision node.</span>
+
+<span class="sd">            Parameters:</span>
+<span class="sd">                func: function</span>
+<span class="sd">                    The function used to evaluate the decision.</span>
+<span class="sd">                args: dict</span>
+<span class="sd">                    Arguments required by the function.</span>
+<span class="sd">                yes_branch: DecisionNode or LeafNode, optional</span>
+<span class="sd">                    The branch to follow if the decision is True.</span>
+<span class="sd">                no_branch: DecisionNode or LeafNode, optional </span>
+<span class="sd">                    The branch to follow if the decision is False.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">func</span> <span class="o">=</span> <span class="n">func</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="n">args</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">yes_branch</span> <span class="o">=</span> <span class="n">yes_branch</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">no_branch</span> <span class="o">=</span> <span class="n">no_branch</span>
+
+<div class="viewcode-block" id="decision_tree.DecisionNode.decide">
+<a class="viewcode-back" href="../../../matengine.generation.html#matengine.generation.decisiontree.decision_tree.DecisionNode.decide">[docs]</a>
+        <span class="k">def</span> <span class="nf">decide</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Make a decision at this node based on the input data.</span>
+
+<span class="sd">            Parameters:</span>
+<span class="sd">                data: dict</span>
+<span class="sd">                    The input data used for making a decision.</span>
+
+<span class="sd">            Returns:</span>
+<span class="sd">                The action or next node based on the function&#39;s evaluation.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">yes_branch</span><span class="o">.</span><span class="n">decide</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">yes_branch</span> <span class="k">else</span> <span class="kc">None</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">no_branch</span><span class="o">.</span><span class="n">decide</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">no_branch</span> <span class="k">else</span> <span class="kc">None</span></div>
+</div>
+
+
+<div class="viewcode-block" id="decision_tree.LeafNode">
+<a class="viewcode-back" href="../../../matengine.generation.html#matengine.generation.decisiontree.decision_tree.LeafNode">[docs]</a>
+    <span class="k">class</span> <span class="nc">LeafNode</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A class to represent a leaf node in the decision tree.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Initialize a leaf node.</span>
+
+<span class="sd">            Parameters:</span>
+<span class="sd">                action: </span>
+<span class="sd">                    The action to be returned when this leaf node is reached.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">action</span> <span class="o">=</span> <span class="n">action</span>
+
+<div class="viewcode-block" id="decision_tree.LeafNode.decide">
+<a class="viewcode-back" href="../../../matengine.generation.html#matengine.generation.decisiontree.decision_tree.LeafNode.decide">[docs]</a>
+        <span class="k">def</span> <span class="nf">decide</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Return the action associated with this leaf node.</span>
+
+<span class="sd">            Parameters:</span>
+<span class="sd">                data: dict </span>
+<span class="sd">                    The input data used for making a decision.</span>
+
+<span class="sd">            Returns:</span>
+<span class="sd">                The action stored in this leaf node.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">action</span></div>
+</div>
+</div>
+
+
+<div class="viewcode-block" id="less_than">
+<a class="viewcode-back" href="../../../matengine.generation.html#matengine.generation.decisiontree.less_than">[docs]</a>
+<span class="k">def</span> <span class="nf">less_than</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">threshold</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Determine if the value in the data is less than or equal to the threshold.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        data: dict</span>
+<span class="sd">            The input data.</span>
+<span class="sd">        key: str</span>
+<span class="sd">            The key whose value is being compared.</span>
+<span class="sd">        threshold: numeric</span>
+<span class="sd">            The threshold value.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool: </span>
+<span class="sd">            True if the value is less than or equal to the threshold, False otherwise.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">threshold</span></div>
+
+
+<div class="viewcode-block" id="greater_than">
+<a class="viewcode-back" href="../../../matengine.generation.html#matengine.generation.decisiontree.greater_than">[docs]</a>
+<span class="k">def</span> <span class="nf">greater_than</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">threshold</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Determine if the value in the data is greater than the threshold.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        data: dict</span>
+<span class="sd">            The input data.</span>
+<span class="sd">        key: str</span>
+<span class="sd">            The key whose value is being compared.</span>
+<span class="sd">        threshold: numeric</span>
+<span class="sd">            The threshold value.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool: </span>
+<span class="sd">            True if the value is greater than the threshold, False otherwise.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">threshold</span></div>
+
+
+<div class="viewcode-block" id="linear">
+<a class="viewcode-back" href="../../../matengine.generation.html#matengine.generation.decisiontree.linear">[docs]</a>
+<span class="k">def</span> <span class="nf">linear</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">key1</span><span class="p">,</span> <span class="n">key2</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Determine if the value lies on or above the line defined by the equation y = mx + c.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        data: dict</span>
+<span class="sd">            The input data.</span>
+<span class="sd">        key1: str</span>
+<span class="sd">            The key representing the x-value.</span>
+<span class="sd">        key2: str` </span>
+<span class="sd">            The key representing the y-value.</span>
+<span class="sd">        m: float </span>
+<span class="sd">            The slope of the line.</span>
+<span class="sd">        c: float </span>
+<span class="sd">            The y-intercept of the line.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool: </span>
+<span class="sd">            True if the point is on or above the line, False otherwise.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">data</span><span class="p">[</span><span class="n">key2</span><span class="p">]</span> <span class="o">-</span> <span class="n">m</span><span class="o">*</span><span class="n">data</span><span class="p">[</span><span class="n">key1</span><span class="p">]</span> <span class="o">-</span> <span class="n">c</span> <span class="o">&gt;=</span> <span class="mi">0</span></div>
+
+
+<div class="viewcode-block" id="ellipse">
+<a class="viewcode-back" href="../../../matengine.generation.html#matengine.generation.decisiontree.ellipse">[docs]</a>
+<span class="k">def</span> <span class="nf">ellipse</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">key1</span><span class="p">,</span> <span class="n">key2</span><span class="p">,</span> <span class="n">cx</span><span class="p">,</span> <span class="n">cy</span><span class="p">,</span> <span class="n">sx</span><span class="p">,</span> <span class="n">sy</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Determine if a point lies inside or on the boundary of an ellipse.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        data: dict</span>
+<span class="sd">            The input data.</span>
+<span class="sd">        key1: str </span>
+<span class="sd">            The key representing the x-coordinate of the point.</span>
+<span class="sd">        key2: str </span>
+<span class="sd">            The key representing the y-coordinate of the point.</span>
+<span class="sd">        cx: float </span>
+<span class="sd">            The x-coordinate of the ellipse center.</span>
+<span class="sd">        cy: float </span>
+<span class="sd">            The y-coordinate of the ellipse center.</span>
+<span class="sd">        sx: float </span>
+<span class="sd">            The semi-axis length in the x-direction.</span>
+<span class="sd">        sy: float </span>
+<span class="sd">            The semi-axis length in the y-direction.</span>
+<span class="sd">        angle: float, optional</span>
+<span class="sd">            The rotation angle of the ellipse in degrees. Default is 0.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool: </span>
+<span class="sd">            True if the point lies within or on the ellipse, False otherwise.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Convert angle to radians</span>
+    <span class="n">angle_rad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+    
+    <span class="c1"># Extract point coordinates and center them</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">key1</span><span class="p">]</span> <span class="o">-</span> <span class="n">cx</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">key2</span><span class="p">]</span> <span class="o">-</span> <span class="n">cy</span>
+    
+    <span class="c1"># Apply rotation</span>
+    <span class="n">x_rot</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle_rad</span><span class="p">)</span> <span class="o">+</span> <span class="n">y</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle_rad</span><span class="p">)</span>
+    <span class="n">y_rot</span> <span class="o">=</span> <span class="o">-</span><span class="n">x</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle_rad</span><span class="p">)</span> <span class="o">+</span> <span class="n">y</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle_rad</span><span class="p">)</span>
+    
+    <span class="c1"># Check ellipse condition with rotated coordinates</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">x_rot</span> <span class="o">/</span> <span class="n">sx</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">y_rot</span> <span class="o">/</span> <span class="n">sy</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">&lt;=</span> <span class="mi">1</span></div>
+
+
+<div class="viewcode-block" id="ellipsoid">
+<a class="viewcode-back" href="../../../matengine.generation.html#matengine.generation.decisiontree.ellipsoid">[docs]</a>
+<span class="k">def</span> <span class="nf">ellipsoid</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">key1</span><span class="p">,</span> <span class="n">key2</span><span class="p">,</span> <span class="n">key3</span><span class="p">,</span> <span class="n">cx</span><span class="p">,</span> <span class="n">cy</span><span class="p">,</span> <span class="n">cz</span><span class="p">,</span> <span class="n">sx</span><span class="p">,</span> <span class="n">sy</span><span class="p">,</span> <span class="n">sz</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Determine if a point lies inside or on the boundary of an ellipsoid.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        data: dict</span>
+<span class="sd">            The input data.</span>
+<span class="sd">        key1: str </span>
+<span class="sd">            The key representing the x-coordinate of the point.</span>
+<span class="sd">        key2: str </span>
+<span class="sd">            The key representing the y-coordinate of the point.</span>
+<span class="sd">        key3: str </span>
+<span class="sd">            The key representing the z-coordinate of the point.</span>
+<span class="sd">        cx: float </span>
+<span class="sd">            The x-coordinate of the ellipsoid center.</span>
+<span class="sd">        cy: float </span>
+<span class="sd">            The y-coordinate of the ellipsoid center.</span>
+<span class="sd">        cz: float </span>
+<span class="sd">            The z-coordinate of the ellipsoid center.</span>
+<span class="sd">        sx: float </span>
+<span class="sd">            The semi-axis length in the x-direction.</span>
+<span class="sd">        sy: float </span>
+<span class="sd">            The semi-axis length in the y-direction.</span>
+<span class="sd">        sz: float </span>
+<span class="sd">            The semi-axis length in the z-direction.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool: </span>
+<span class="sd">            True if the point lies within or on the ellipsoid, False otherwise.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="n">key1</span><span class="p">]</span><span class="o">-</span><span class="n">cx</span><span class="p">)</span><span class="o">/</span><span class="n">sx</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="n">key2</span><span class="p">]</span><span class="o">-</span><span class="n">cy</span><span class="p">)</span><span class="o">/</span><span class="n">sy</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="n">key3</span><span class="p">]</span><span class="o">-</span><span class="n">cz</span><span class="p">)</span><span class="o">/</span><span class="n">sz</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">&lt;=</span> <span class="mi">1</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Evan John Ricketts.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
